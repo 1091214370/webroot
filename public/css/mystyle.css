@@ -1,0 +1,14 @@
+html,body{height:100%;background: url(../img/timg.jpg) no-repeat;}
+.min-height{height:auto;min-height:100%;}
+.mynav{margin-top: 2%;border:none;border-radius: 5px;}
+.dis-right{float: right;margin-right: 10%;}
+table{font-size: 18px;}
+.well{opacity: 0;}
+.mydis{float: none;margin: 2px auto;}
+footer{position: relative;margin-top:-60px;height:30px;width:100%;text-align:center;border-top: 2px solid #123456;padding: 3%;color:white;background:#828282; }
+/*登录页面*/
+.mylogin{width:500px;background-color: white;opacity: 0.9;padding: 10% 4% 5% 2%;}
+/*上传页面*/
+.myupload{width:800px;background-color: white;opacity: 0.9;padding: 5% 4% 5% 2%;}
+/*管理页面*/
+.myadmin{width:100%;min-height: 100%;height: auto;}

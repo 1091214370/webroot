@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title><%=title%></title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/mystyle.css" rel="stylesheet">
+	<style>
+		body{background: #cdc8b1;height: 100%;}
+	</style>
+</head>
+<body>
+	<%- include("../include/header.ejs") %>
+	<ol class="breadcrumb">
+		<li><a href="/">首页</a></li>
+		<li>管理页面</li>
+	</ol>
+	<div class="row">
+		<table class="table table-hover table-bordered text-center">
+			<thead>
+				<tr>
+					<td>序号</td>
+					<td>标题</td>
+					<td>描述</td>
+					<td>图片</td>
+					<td>预览</td>
+					<td>GitHub</td>
+					<td>修改</td>
+					<td>删除</td>
+				</tr>
+			</thead>
+			<tbody>
+
+			</tbody>
+		</table>
+	</div>
+    <%- include("../include/footer.ejs") %>

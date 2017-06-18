@@ -1,0 +1,80 @@
+0.<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+	<title><%=title%></title>
+	<meta name="description" content="">
+	<meta name="keywords" content="">
+	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
+	<link href="/css/mystyle.css" rel="stylesheet">
+	<style>
+		body{background: #cdc8b1;height: auto;}
+	</style>
+</head>
+<body>
+<%- include("../include/header.ejs") %>
+<ol class="breadcrumb">
+	<li><a href="/">首页</a></li>
+	<li>上传页面</li>
+</ol>
+<div class="myupload container">
+	<form method="post" id="form">
+		<select class="form-control" id="mySelect">
+			<option>上传网站案例</option>
+			<option>上传插件案例</option>
+			<option>上传博客</option>
+		</select>
+		<blockquote class="bg-info">您目前选择的是<strong><span id="takeup"></span></strong>，请完成以下操作。</blockquote>
+		<% var web;%>
+		<input type="hidden" name="id" value="">
+		<div class="form-group">
+			<label for="exampleInputEmail1">标题</label>
+			<input type="text" class="form-control input-lg"  placeholder="标题" name="title" value="">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">描述</label>
+			<input type="text" class="form-control input-lg"  placeholder="描述" name="summary" value="">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputFile">图片地址</label>
+			<input type="text" class="form-control input-lg"  name="image" value="http://xiaochenghua.iego.cn/webroot/img/blog.jpg">
+		</div>
+		<div class="form-group">
+			<label for="exampleInputEmail1">预览链接</label>
+			<input type="text" class="form-control input-lg" placeholder="预览链接" name="sumsrc" value="" >
+		</div>
+		<div class="form-group">
+			<label for="exampleInputPassword1">GitHub链接</label>
+			<input type="text" class="form-control input-lg"  placeholder="预览链接" name="github" value="" >
+		</div>
+		<button type="submit" class="btn btn-default" id="submit">提交</button>
+	</form>
+</div>
+<script type="text/javascript">
+	var form=document.getElementById('form');
+	var mySelect=document.getElementById('mySelect');
+	var takeup=document.getElementById('takeup');
+	var submit=document.getElementById('submit');
+	takeup.innerHTML=mySelect.options[0].text;
+	mySelect.onchange=function(){
+		var num=mySelect.selectedIndex;
+		takeup.innerHTML=mySelect.options[num].text;
+	};
+	submit.onclick=function(){
+		var num=mySelect.selectedIndex;
+		switch(num){
+			case 0:
+			form.action="/admin/newweb";
+			break;
+			case 1:
+			form.action="/admin/newtakein";
+			break;
+			case 2:
+			form.action="/admin/newblog";
+			break;
+		}
+		
+	}
+</script>
+<%- include("../include/footer.ejs") %>
