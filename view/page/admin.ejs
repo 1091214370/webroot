@@ -8,9 +8,7 @@
 	<meta name="keywords" content="">
 	<link href="/libs/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet">
 	<link href="/css/mystyle.css" rel="stylesheet">
-	<style>
-		body{background: #cdc8b1;height: 100%;}
-	</style>
+	<script type="text/javascript" src="/libs/jquery/dist/jquery.min.js"></script>
 </head>
 <body>
 	<%- include("../include/header.ejs") %>
@@ -18,6 +16,10 @@
 		<li><a href="/">首页</a></li>
 		<li>管理页面</li>
 	</ol>
+	<div class="page-header">
+		<h2>网站列表</h2>
+	</div>
+	<% var webs,takeins,blogs; %>
 	<div class="row">
 		<table class="table table-hover table-bordered text-center">
 			<thead>
@@ -28,13 +30,151 @@
 					<td>图片</td>
 					<td>预览</td>
 					<td>GitHub</td>
-					<td>修改</td>
 					<td>删除</td>
 				</tr>
 			</thead>
 			<tbody>
-
+			<% if(webs && webs.length>0){ %>
+			  <% for(var i=0;i<webs.length;i++){%>
+				<tr class="webs<%= webs[i].id%>">
+					<td><%= i %></td>
+					<td><%= webs[i].title %></td>
+					<td><%= webs[i].summary %></td>
+					<td><% if(webs[i].image!="null"){%>
+						<a href="<%=webs[i].image %>" target="_blank">查看</a>
+						<%}else{%>
+							null 
+							<%} %></td>
+					<td><% if(webs[i].sumsrc!="null"){%>
+						<a href="<%=webs[i].sumsrc %>" target="_blank">查看</a>
+						<%}else{%>
+							null
+							<%} %></td>
+					<td><% if(webs[i].github!="null"){%>
+						<a href="<%=webs[i].github %>" target="_blank">查看</a>
+						<%}else{%>
+							null
+							<%} %></td>
+					<td><button type="button" class="btn btn-danger delWeb" data-id="<%=webs[i].id%>" >删除</button></td>
+				</tr>
+				<% }%>
+				<% }%>
 			</tbody>
 		</table>
 	</div>
+	<div class="well"></div>
+	<div class="page-header">
+		<h2>插件列表</h2>
+	</div>
+	<div class="row">
+		<table class="table table-hover table-bordered text-center">
+			<thead>
+				<tr>
+					<td>序号</td>
+					<td>标题</td>
+					<td>描述</td>
+					<td>图片</td>
+					<td>预览</td>
+					<td>GitHub</td>
+					<td>删除</td>
+				</tr>
+			</thead>
+			<tbody>
+			<% if(takeins && takeins.length>0){ %>
+			  <% for(var i=0;i<takeins.length;i++){%>
+				<tr class="takeins<%=takeins[i].id%>" >
+					<td><%= i %></td>
+					<td><%= takeins[i].title %></td>
+					<td><%= takeins[i].summary %></td>
+					<td><% if(takeins[i].image!="null"){%>
+						<a href="<%=takeins[i].image %>" target="_blank">查看</a>
+						<%}else{%>
+							null
+							<%} %></td>
+					<td><% if(takeins[i].sumsrc!="null"){%>
+						<a href="<%=takeins[i].sumsrc %>" target="_blank">查看</a>
+						<%}else{%>
+							null 
+							<%} %></td>
+					<td><% if(takeins[i].github!="null"){%>
+						<a href="<%=takeins[i].github %>" target="_blank">查看</a>
+						<%}else{%>
+							null 
+							<%} %></td>
+					<td><button type="button" class="btn btn-danger delTakein" data-id="<%=takeins[i].id%>" >删除</button></td>
+				</tr>
+				<% }%>
+				<% }%>
+			</tbody>
+		</table>
+	</div>
+	<div class="well"></div>
+	<div class="page-header">
+		<h2>博客列表</h2>
+	</div>
+	<div class="row">
+		<table class="table table-hover table-bordered text-center">
+			<thead>
+				<tr>
+					<td>序号</td>
+					<td>标题</td>
+					<td>描述</td>
+					<td>图片</td>
+					<td>预览</td>
+					<td>GitHub</td>
+					<td>删除</td>
+				</tr>
+			</thead>
+			<tbody>
+			<% if(blogs && blogs.length>0){ %>
+			  <% for(var i=0;i<blogs.length;i++){%>
+				<tr class="blogs<%=blogs[i].id%>" >
+					<td><%= i %></td>
+					<td><%= blogs[i].title %></td>
+					<td><%= blogs[i].summary %></td>
+					<td><% if(blogs[i].image!="null"){%>
+						<a href="<%=blogs[i].image %>" target="_blank">查看</a>
+						<%}else{%>blogs
+							null 
+							<%} %></td>
+					<td><% if(blogs[i].sumsrc!="null"){%>
+						<a href="<%=blogs[i].sumsrc %>" target="_blank">查看</a>
+						<%}else{%>
+							null 
+							<%} %></td>
+					<td><% if(blogs[i].github!="null"){%>
+						<a href="<%=blogs[i].github %>" target="_blank">查看</a>
+						<%}else{%>
+							null
+							<%} %></td>
+					<td><button type="button" class="btn btn-danger delBlog" data-id="<%=blogs[i].id%>">删除</button></td>
+				</tr>
+				<% }%>
+				<% }%>
+			</tbody>
+		</table>
+	</div>
+	<script>
+		$(function(){
+			$(".delWeb").click(function(e){ delitem(e,"webs")});
+			$(".delTakein").click(function(e){ delitem(e,"takeins")});
+			$(".delBlog").click(function(e){ delitem(e,"blogs")});
+		});
+		function delitem (e,url){
+				var target=$(e.target);
+				var id=target.data("id");
+				var tr=$("."+url+id);
+				$.ajax({
+					type:"delete",
+					url:"/delete/"+url+"?id="+id
+				})
+				.done(function(results){
+					if(results.success===1){
+						if(tr.length>0){
+							tr.remove();
+						}
+					}
+				});
+			}
+	</script>
     <%- include("../include/footer.ejs") %>

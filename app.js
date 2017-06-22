@@ -61,8 +61,28 @@ app.get("/upload",function(req,res){
 });
 //admin
 app.get("/admin",function(req,res){
-	res.render('admin',{title:'管理页面'});
-});
+	Webdb.fetch(
+		function(err,webs){
+			if(err){
+				console.log(err);
+			}
+			Takein.fetch(
+				function(err,takeins){
+					if(err){
+						console.log(err);
+					}
+					Blog.fetch(
+						function(err,blogs){
+							if(err){
+								console.log(err);
+							}
+							res.render('admin',{title:'管理页面', "webs":webs,"takeins":takeins,"blogs":blogs});
+						})
+				})
+		});
+	
+});	
+
 //admin/newweb
 app.post('/admin/newweb',function(req,res) {
 	var id = req.body.id;
@@ -163,5 +183,49 @@ app.get("/list/blog",function(req,res){
 		});
 })
 
+//deleate web
+app.delete("/delete/webs",function(req,res){
+	var id = req.query.id;
+	if(id) {
+		Webdb.remove({_id: id},function(err,movie) {
+			if(err){
+				console.log(err);
+			}
+			else{
+				res.json({success: 1});
+			}
+		})
+	}
+})
+
+//deleate takein
+app.delete("/delete/takeins",function(req,res){
+	var id = req.query.id;
+	if(id) {
+		Takein.remove({_id: id},function(err,movie) {
+			if(err){
+				console.log(err);
+			}
+			else{
+				res.json({success: 1});
+			}
+		})
+	}
+})
+
+//deleate blog
+app.delete("/delete/blogs",function(req,res){
+	var id = req.query.id;
+	if(id) {
+		Blog.remove({_id: id},function(err,movie) {
+			if(err){
+				console.log(err);
+			}
+			else{
+				res.json({success: 1});
+			}
+		})
+	}
+})
 
 
