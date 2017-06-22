@@ -28,7 +28,11 @@ node app.js
   -/list/takein
 
   -/list/blog
+<<<<<<< HEAD
  
   -/admin
   -/upload
 
+=======
+  
+>>>>>>> 9d7ee90ae19d1c84c2b9d0f84d3fe5617153942d
