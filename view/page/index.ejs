@@ -37,7 +37,7 @@
 			<table class="table ">
 				<tr>
 					<td class="danger" ><h4>联系电话：13734472101</h4></td>
-					<td class="active"><h4>邮箱：1091214370@qq.com/</h4></td>
+					<td class="active"><h4>邮箱：1091214370@qq.com</h4></td>
 				</tr>
 			</table>
 			<table class="table ">
@@ -57,7 +57,7 @@
 				</tr>
 			</table>
 			<table class="table">
-				<tr><td><a href="http://119.29.199.85/ownweb" target="_blank"><h4>更多信息点这里</h4></a></td></tr>
+				<tr><td><a href="http://119.29.199.85:8080/ownweb" target="_blank"><h4>更多信息点这里</h4></a></td></tr>
 			</table>
 		</div>
 	</div>
@@ -74,12 +74,12 @@
 				<%length=webs.length;%>
 			<%}%>
 			<% for(var i=0;i<length;i++){%>
-				<div class="col-sm-6 col-md-4">
+				<div class="col-sm-6 col-md-4 web-list">
 					<div class="thumbnail">
 						<img src="<%=webs[i].image %>" alt="<%=webs[i].title %>">
 						<div class="caption">
-							<h3><%=webs[i].title %></h3>
-							<p><%= webs[i].summary %></p>
+							<h3 title="<%=webs[i].title %>"><%=webs[i].title %></h3>
+							<p class="summary-p"><%= webs[i].summary %></p>
 							<p><a href="<%= webs[i].sumsrc %>" class="btn btn-primary" role="button" target="_blank">在线预览</a> <a href="<%= webs[i].github%>" class="btn btn-default" role="button" target="_blank">GitHub源码</a></p>
 						</div>
 					</div>
