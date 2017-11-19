@@ -1,7 +1,7 @@
 html,body{height:100%;background: #cdc8b1;}
 .web-list{height: 350px;}
 .web-list .thumbnail{overflow: hidden;}
-.web-list h3{overflow: hidden; text-overflow:ellipsis;word-break: normal;width: 100%;}
+.thumbnail h3{overflow: hidden; text-overflow:ellipsis;word-break: normal;width: 100%;}
 .summary-p{word-wrap: break-word; height: 50px;line-height: 24px;overflow-y:auto;}
 .min-height{height:auto;min-height:100%;}
 .mynav{margin-top: 2%;border:none;border-radius: 5px;}
