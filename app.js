@@ -13,7 +13,7 @@ var app =express();
 mongoose.connect('mongodb://127.0.0.1:27017/nodeweb');
 mongoose.Promise = global.Promise;
 app.set('views','./view/page');
-app.set("view cache",true);
+app.set('view cache',true);
 app.set('view engine','ejs');
 
 
@@ -28,7 +28,7 @@ app.listen(port);
 
 console.log('server start on port '+port);
 //index 	
-app.get("/",function(req,res){
+app.get('/',function(req,res){
 	Webdb.fetch(
 		function(err,webs){
 			if(err){
@@ -44,23 +44,23 @@ app.get("/",function(req,res){
 							if(err){
 								console.log(err);
 							}
-							res.render('index',{title:'首页', "webs":webs,"takeins":takeins,"blogs":blogs});
-						})
-				})
+							res.render('index',{title:'首页', 'webs':webs,'takeins':takeins,'blogs':blogs});
+						});
+				});
 		});
 	
 });	
 //login
-app.get("/login",function(req,res){
+app.get('/login',function(req,res){
 	res.render('login',{title:'登录页面'});
 });
 
 //upload
-app.get("/upload",function(req,res){
+app.get('/upload',function(req,res){
 	res.render('upload',{title:'上传页面'});
 });
 //admin
-app.get("/admin",function(req,res){
+app.get('/admin',function(req,res){
 	Webdb.fetch(
 		function(err,webs){
 			if(err){
@@ -76,9 +76,9 @@ app.get("/admin",function(req,res){
 							if(err){
 								console.log(err);
 							}
-							res.render('admin',{title:'管理页面', "webs":webs,"takeins":takeins,"blogs":blogs});
-						})
-				})
+							res.render('admin',{title:'管理页面', 'webs':webs,'takeins':takeins,'blogs':blogs});
+						});
+				});
 		});
 	
 });	
@@ -90,22 +90,22 @@ app.post('/admin/newweb',function(req,res) {
 	var summary =req.body.summary;
 	var sumsrc =req.body.sumsrc;
 	var github =req.body.github;
-    var image =req.body.image;
- 	var _web;
-  _web = new Webdb({
-  	title:title,
-  	summary:summary,
-    image:image,
-    sumsrc:sumsrc,
-    github:github
-  });
-  _web.save(function(err,web) {
-  	if(err){
-  		console.log(err);
-  	}
-  	res.redirect('/list/web');
-  });
-})
+	var image =req.body.image;
+	var _web;
+	_web = new Webdb({
+		title:title,
+		summary:summary,
+		image:image,
+		sumsrc:sumsrc,
+		github:github
+	});
+	_web.save(function(err,web) {
+		if(err){
+			console.log(err);
+		}
+		res.redirect('/list/web');
+	});
+});
 //admin/newtakein
 app.post('/admin/newtakein',function(req,res) {
 	var id = req.body.id;
@@ -113,22 +113,22 @@ app.post('/admin/newtakein',function(req,res) {
 	var summary =req.body.summary;
 	var sumsrc =req.body.sumsrc;
 	var github =req.body.github;
- 	var image =req.body.image;
-  var _web;
-  _web = new Takein({
-  	title:title,
-  	summary:summary,
-    image:image,
-    sumsrc:sumsrc,
-    github:github
-  });
-  _web.save(function(err,takein) {
-  	if(err){
-  		console.log(err);
-  	}
-  	res.redirect('/list/takein');
-  });
-})
+	var image =req.body.image;
+	var _web;
+	_web = new Takein({
+		title:title,
+		summary:summary,
+		image:image,
+		sumsrc:sumsrc,
+		github:github
+	});
+	_web.save(function(err,takein) {
+		if(err){
+			console.log(err);
+		}
+		res.redirect('/list/takein');
+	});
+});
 //admin/newblog
 app.post('/admin/newblog',function(req,res) {
 	var id = req.body.id;
@@ -137,54 +137,54 @@ app.post('/admin/newblog',function(req,res) {
 	var sumsrc =req.body.sumsrc;
 	var github =req.body.github;
 	var image =req.body.image;
-  var _web;
-  _web = new Blog({
-  	title:title,
-  	summary:summary,
-    image:image,
-    sumsrc:sumsrc,
-    github:github
-  });
-  _web.save(function(err,blog) {
-  	if(err){
-  		console.log(err);
-  	}
-  	res.redirect('/list/blog');
-  });
-})
+	var _web;
+	_web = new Blog({
+		title:title,
+		summary:summary,
+		image:image,
+		sumsrc:sumsrc,
+		github:github
+	});
+	_web.save(function(err, blog) {
+		if(err){
+			console.log(err);
+		}
+		res.redirect('/list/blog');
+	});
+});
 //web list
-app.get("/list/web",function(req,res){
+app.get('/list/web',function(req,res){
 	Webdb.fetch(
 		function(err,webs){
 			if(err){
 				console.log(err);
 			}
-			res.render('web',{title:'web列表页',"webs":webs});
+			res.render('web',{title:'web列表页','webs':webs});
 		});
-})
+});
 //takein list
-app.get("/list/takein",function(req,res){
+app.get('/list/takein',function(req,res){
 	Takein.fetch(
 		function(err,takeins){
 			if(err){
 				console.log(err);
 			}
-			res.render('takein',{title:'插件列表页',"takeins":takeins});
+			res.render('takein',{title:'插件列表页','takeins':takeins});
 		});
-})
+});
 //blog list
-app.get("/list/blog",function(req,res){
+app.get('/list/blog',function(req,res){
 	Blog.fetch(
 		function(err,blogs){
 			if(err){
 				console.log(err);
 			}
-			res.render('blog',{title:'博客列表页',"blogs":blogs});
+			res.render('blog',{title:'博客列表页','blogs':blogs});
 		});
-})
+});
 
 //deleate web
-app.delete("/delete/webs",function(req,res){
+app.delete('/delete/webs',function(req,res){
 	var id = req.query.id;
 	if(id) {
 		Webdb.remove({_id: id},function(err,movie) {
@@ -194,12 +194,12 @@ app.delete("/delete/webs",function(req,res){
 			else{
 				res.json({success: 1});
 			}
-		})
+		});
 	}
-})
+});
 
 //deleate takein
-app.delete("/delete/takeins",function(req,res){
+app.delete('/delete/takeins',function(req,res){
 	var id = req.query.id;
 	if(id) {
 		Takein.remove({_id: id},function(err,movie) {
@@ -209,12 +209,12 @@ app.delete("/delete/takeins",function(req,res){
 			else{
 				res.json({success: 1});
 			}
-		})
+		});
 	}
-})
+});
 
 //deleate blog
-app.delete("/delete/blogs",function(req,res){
+app.delete('/delete/blogs',function(req,res){
 	var id = req.query.id;
 	if(id) {
 		Blog.remove({_id: id},function(err,movie) {
@@ -224,8 +224,8 @@ app.delete("/delete/blogs",function(req,res){
 			else{
 				res.json({success: 1});
 			}
-		})
+		});
 	}
-})
+});
 
 
